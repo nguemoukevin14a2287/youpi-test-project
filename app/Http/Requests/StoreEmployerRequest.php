@@ -25,7 +25,12 @@ class StoreEmployerRequest extends FormRequest
             'name' => ['required','min:4'],
             'matricule' => ['nullable', 'unique:employers'],
             'image' => ['nullable', 'image'],
-            'sexe' => ['required', 'in:b,g']
+            'sexe' => ['required', 'in:b,g'],
+            'birthday' => ['required', 'date', 'before:' . date('Y-m-d', strtotime('21 years ago'))],
+            'address' => ['nullable'],
+            'joined_at' => ['required', 'date'],
+            'salary' => ['nullable', 'integer'],
+            'poste' => ['nullable'/*, 'exists:postes,id'*/]
         ];
     }
 }
