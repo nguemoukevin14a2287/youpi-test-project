@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+}
+
+.limit-1-line {
+    @apply text-ellipsis whitespace-nowrap overflow-hidden;
+}
+.text-one-line {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-link {
+	@apply px-2 py-1 border rounded-lg hover:bg-slate-300 md:flex items-center gap-2 text-center;
+}
+.menu-link.active {
+	@apply border-slate-400 bg-slate-400;
+}
+.menu-link .menu-icon {
+    @apply block md:inline-block mx-auto md:mx-0;
+	width: 1rem;
+	height: 1rem;
+}
+.menu-link .menu-txt {
+    @apply rotate-90 md:rotate-0;
+}
+
+.link {
+	@apply text-blue-400 hover:text-sky-500;
+}
+
+.btn {
+	@apply inline-flex items-center justify-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white capitalize text-center tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150;
+}
+.btn-primary {
+	@apply bg-sky-800 hover:bg-sky-700 focus:bg-sky-700 active:bg-sky-900 focus:ring-indigo-500;
+}
+.btn-secondary {
+	@apply bg-orange-800 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-900 focus:ring-indigo-500;
+}
+.btn-warning {
+	@apply bg-yellow-800 hover:bg-yellow-700 focus:bg-yellow-700 active:bg-yellow-900 focus:ring-indigo-500;
+}
+.btn-success {
+	@apply bg-green-800 hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:ring-indigo-500;
+}
+.btn-danger {
+	@apply bg-red-800 hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:ring-indigo-500;
+}
+
+.form-control {
+	@apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full;
+}
+.checkbox {
+    @apply rounded border-gray-300 text-indigo-600 shadow-sm ring-0 focus:ring-0 focus:ring-transparent ring-transparent checked:ring-0 !important; 
+}
+
+.relative-to-model {
+    @apply bg-gray-200 py-6 my-4 text-center px-4 rounded-lg;
+}
+
+.h2-title {
+    @apply font-semibold text-xl text-gray-800 leading-tight;
+}
+
+.tw-table-container {
+    @apply overflow-auto shadow-sm;
+}
+.tw-table {
+    @apply border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm;
+}
+.tw-thead {
+    @apply bg-slate-50 dark:bg-slate-700 text-center;
+}
+.tw-th-col {
+    @apply border border-slate-300 dark:border-slate-600 font-semibold p-2 text-slate-900 dark:text-slate-200 text-center;
+}
+.tw-td {
+    @apply border border-slate-300 dark:border-slate-700 p-1 md:p-2 text-slate-500 dark:text-slate-400;
+}
+
+.cust-tooltip {
+    width: 200px;
+    background: #59c7f9;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    bottom: calc(100% + 11px);
+    left: 50%;
+    transform: translate-x(-50%)
+}
+.cust-tooltip-box {
+    position: relative
+}
+.cust-triangle {
+    border-width: 0 6px 6px;
+    border-color: transparent;
+    border-bottom-color: #59c7f9;
+    position: absolute;
+    bottom: -6px;
+    transform: rotate(180deg) translate-x(-50%);
+    left: calc(50% - 12px)
+}
+.link-icon {
+    @apply inline-flex items-center gap-2;
+}
+.content-page {
+    @apply  max-w-7xl mx-auto lg:px-8 px-2 pt-2 md:pt-4 ;
+}

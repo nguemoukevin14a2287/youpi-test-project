@@ -1,0 +1,75 @@
+@import "./Footer.css";
+@import "lib/bootstrap/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@600&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital@1&display=swap');
+
+*{
+    font-family: Montserrat;
+}
+
+.nav-item:hover{
+    border-top: 2px solid #ceb302;
+}
+.active{
+    border-top: 2px solid #ceb302;
+}
+
+@media only screen and (max-width: 767px) {
+    .active{
+        background-color: #ceb302;
+    }
+    .logo{
+        width: 150px;
+    }
+    .nav-item{
+        border-bottom: 1px solid #ceb302;
+    }
+    .men{
+        border: 1px solid #ceb302;
+    }
+    .navbar-nav{
+        text-align: center;
+    }
+    .titre{
+        padding-top: 6rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .active{
+        background-color: #ceb302;
+    }
+    .logo{
+        width: 180px;
+    }
+    .nav-item{
+        font-size: 22px;
+        border-bottom: 1px solid #ceb302;
+    }
+    .men{
+        border: 1px solid #ceb302;
+    }
+    .navbar-nav{
+        text-align: center;
+    }
+
+}
+@media only screen and (max-width: 820px) {
+    .active{
+        background-color: #ceb302;
+    }
+    .logo{
+        width: 150px;
+    }
+    .nav-item{
+        border-bottom: 1px solid #ceb302;
+    }
+    .men{
+        border: 1px solid #ceb302;
+    }
+    .navbar-nav{
+        text-align: center;
+    }
+    .titre{
+        padding-top: 5rem;
+    }
+}
