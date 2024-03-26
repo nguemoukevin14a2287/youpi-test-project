@@ -2,14 +2,16 @@
 	import { useForm } from '@inertiajs/vue3'
 	import {ref, inject, computed} from 'vue'
 	import defaultWorker from '@/../assets/images/default-worker.jpeg'
+	import ErrorMsg from '@/Components/ErrorMsg.vue'
 
 	const swal = inject('$swal')
-	const imgUploaded = ref(defaultWorker)
+	const postesList = ref([])
 	const props = defineProps({
 		employer: {default: () => ({})}
 	})
-	const defaultEmployer = {name: '', birthday: '', address: '', joined_at: '', salary: '', sexe: 'b', strengths: [], image: null}
+	const defaultEmployer = {name: 'Nguemou Kevin', birthday: '1996-02-18', address: 'Yaounde Mendong', joined_at: '2024-04-01', salary: '250000', sexe: 'b', strengths: ['brave', 'intelligent'], image: null, matricule: '14a2287', poste: 0}
 	const form = useForm({...defaultEmployer, ...props.employer})
+	const imgUploaded = ref(props.employer.image_path || defaultWorker)
 
 	const isUpdate = computed(() => props.employer && props.employer.id && props.employer.id == parseInt(props.employer.id))
 
@@ -25,13 +27,15 @@
 				onSuccess: page => {
 					swal.fire('Reussi', 'Employer enregistre avec succes', 'success')
 					form.reset()
+					form.image = null
+					imgUploaded.value = defaultWorker
 				}
 			})
 		}
 	}
 	const updateimage = event => {
 		let file = event.target.files[0]
-		form.images = file
+		form.image = file
 		var reader  = new FileReader();
 
 		reader.onloadend = function () {
@@ -51,24 +55,41 @@
 			<form @submit.prevent="save">
 				<div class="md:grid grid-cols-2 lg:grid-cols-3 gap-2">
 					<div>
+						<label for="matricule-input">Matricule:</label>
+						<input id="matricule-input" class="form-control" v-model="form.matricule" type="text" required placeholder="Matricule complet de l'employer" />
+						<error-msg :message="form.errors.matricule" />
+					</div>
+					<div>
 						<label for="name-input">Nom:</label>
 						<input id="name-input" class="form-control" v-model="form.name" type="text" required placeholder="Nom complet de l'employer" />
+						<error-msg :message="form.errors.name" />
+					</div>
+					<div>
+						<label for="poste-input">Poste:</label>
+						<select name="poste" id="poste-input" class="form-control" v-model="form.poste" placeholder="Matricule de l'employer">
+							<option v-for="(poste, i) in postesList" :value="poste.id">{{ poste.title }}</option>
+						</select>
+						<error-msg :message="form.errors.poste" />
 					</div>
 					<div>
 						<label for="address-input">Adresse:</label>
 						<input id="address-input" class="form-control" v-model="form.address" type="text" required placeholder="Adresse de l'employer" />
+						<error-msg :message="form.errors.address" />
 					</div>
 					<div>
 						<label for="birthday-input">Date de naissance:</label>
 						<input id="birthday-input" class="form-control" v-model="form.birthday" type="date" required placeholder="Date de naissance" />
+						<error-msg :message="form.errors.birthday" />
 					</div>
 					<div>
 						<label for="joined-at-input">Debut de service:</label>
 						<input id="joined-at-input" class="form-control" v-model="form.joined_at" type="date" required placeholder="Date de recrutement" />
+						<error-msg :message="form.errors.joined_at" />
 					</div>
 					<div>
 						<label for="salary-input">Salaire:</label>
 						<input id="salary-input" class="form-control" v-model="form.salary" type="number" step="100" required placeholder="Quel est son salaire?" />
+						<error-msg :message="form.errors.salary" />
 					</div>
 					<div class="self-end">
 						<label for="sexe-input">Sexe:</label>
@@ -78,6 +99,7 @@
 								<span>{{ s.title }}</span>
 							</label>
 						</div>
+						<error-msg :message="form.errors.sexe" />
 					</div>
 					<div class="col-span-full"></div>
 					<div class="bg-sky-100/50 p-2">
@@ -88,6 +110,7 @@
 							</div>
 						</label>
 						<input id="image-input" class="form-control" @change="updateimage" type="file" required accept="image/png, image/gif, image/jpeg" />
+						<error-msg :message="form.errors.image" />
 					</div>
 					<div class="col-span-2 bg-sky-100 p-2">
 						<label for="strengths-input">Qualites:</label>

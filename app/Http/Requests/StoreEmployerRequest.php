@@ -22,8 +22,10 @@ class StoreEmployerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'image' => ['file']
+            'name' => ['required','min:4'],
+            'matricule' => ['nullable', 'unique:employers'],
+            'image' => ['nullable', 'image'],
+            'sexe' => ['required', 'in:b,g']
         ];
     }
 }

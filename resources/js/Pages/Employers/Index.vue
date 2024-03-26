@@ -23,16 +23,24 @@ const props = defineProps({
             <div class="tw-table-container">
                 <table class="tw-table">
                     <thead class="tw-thead">
-                        <th class="tw-th-col">#</th>
+                        <th class="tw-th-col">Matricule</th>
+                        <th class="tw-th-col">Poste</th>
                         <th class="tw-th-col">Nom</th>
                         <th class="tw-th-col">Salaire</th>
                         <th class="tw-th-col">Actions</th>
                     </thead>
                     <tbody>
-                        <tr v-for="(employer, i) in employers.data" :key="employer.matricule">
-                            <th scope="row" class="tw-td">{{ (employers.current_page - 1) * employers.per_page + i + 1 }}</th>
-                            <td class="tw-td"><Link :href="route('employers.show', employer)" class="link">{{ employer.name }}</Link></td>
-                            <td class="tw-td">{{ employer.salary }}</td>
+                        <tr v-for="(employer, i) in employers.data" :key="employer.id">
+                            <th scope="row" class="tw-td">{{ employer.matricule }}</th>
+                            <td class="tw-td">
+                                <Link v-if="employer.poste_id" :href="route('postes.show', employer.poste_id)" class="link">{{ employer.poste_name }}</Link>
+                            </td>
+                            <td class="tw-td">
+                                <Link :href="route('employers.show', employer)" class="link flex items-center gap-2">
+                                    <img :src="employer.image_path" alt="" class="w-8 h-8 rounded-full border "> <span>{{ employer.name }}</span>
+                                </Link>
+                            </td>
+                            <td class="tw-td">{{ employer.salary }} XAF</td>
                             <td class="tw-td">
                                 <div class="flex items-center gap-2">
                                     <Link :href="route('employers.edit', employer)" class="link"><icon-edit /></Link>
@@ -42,13 +50,13 @@ const props = defineProps({
                         </tr>
                     </tbody>
                 </table>
-                <div class="flex items-center gap-2 mt-4">
-                    <div class="p-3 col-span-2 flex items-end justify-around gap-2 grow" v-if="employers.total">
-                        <Pagination :data="employers" />
-                        <NumberItems :current="employers.per_page" key="number_products_per_page"  />
-                    </div>
-                    <Link :href="route('employers.create')" class="btn btn-success">Ajouter</Link>
+            </div>
+            <div class="flex items-center gap-2 mt-4">
+                <div class="p-3 col-span-2 flex items-end justify-around gap-2 grow" v-if="employers.total">
+                    <Pagination :data="employers" />
+                    <NumberItems :current="employers.per_page" key="number_products_per_page"  />
                 </div>
+                <Link :href="route('employers.create')" class="btn btn-success">Ajouter</Link>
             </div>
         </div>
     </AuthenticatedLayout>

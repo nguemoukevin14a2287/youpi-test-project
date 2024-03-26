@@ -17,4 +17,13 @@ class Employer extends Model
     {
         return $this->belongsTo(Poste::class);
     }
+
+    public function getImagePathAttribute()
+    {
+        return asset('storage/images/employers/' . ($this->image ?? 'default-worker.jpeg'));
+    }
+    public function getSexeFullAttribute($val)
+    {
+        return $val == 'b' ? 'Homme' : 'Femme';
+    }
 }

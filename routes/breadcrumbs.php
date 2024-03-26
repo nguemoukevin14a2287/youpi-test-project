@@ -16,7 +16,12 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('employers.index', function (BreadcrumbTrail $trail) {
 	$trail->parent('dashboard');
 	$trail->push('Employers', route('employers.index'));
-});/*
+});
+Breadcrumbs::for('employers.create', function (BreadcrumbTrail $trail) {
+	$trail->parent('employers.index');
+	$trail->push('Ajouter', route('employers.create'));
+});
+/*
 Breadcrumbs::for('employers.show', function (BreadcrumbTrail $trail, $employer) {
 	$trail->parent('employers.show');
 	$trail->push($employer->name, route('employers.index'));
@@ -24,8 +29,4 @@ Breadcrumbs::for('employers.show', function (BreadcrumbTrail $trail, $employer) 
 Breadcrumbs::for('employers.edit', function (BreadcrumbTrail $trail, $employer) {
 	$trail->parent('employers.show', $employer);
 	$trail->push('Editer', route('employers.edit'));
-});
-Breadcrumbs::for('employers.create', function (BreadcrumbTrail $trail) {
-	$trail->parent('employers.index');
-	$trail->push('Ajouter', route('employers.create'));
 });*/

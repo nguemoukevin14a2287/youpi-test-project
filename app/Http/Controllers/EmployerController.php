@@ -16,7 +16,9 @@ class EmployerController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('Employers/Index', ['employers' => Employer::select('id', 'name', 'salary')->paginate($request->number_items ?? 10)]);
+        $employers = Employer::select('id', 'name', 'salary', 'image', 'image as image_path', 'poste_id', 'poste_id as poste_name', 'sexe as sexe_full', 'matricule')
+            ->paginate($request->number_items ?? 10);
+        return Inertia::render('Employers/Index', ['employers' => $employers]);
     }
 
     /**
@@ -40,10 +42,10 @@ class EmployerController extends Controller
         $employer->sexe = $request->sexe;
         $employer->strengths = $request->strengths;
         $employer->joined_at = $request->joined_at;
-        $employer->matricule = Str::random(5);
+        $employer->matricule = $request->matricule ?? Str::random(7);
         if($image = $request->file('image')){
-            $path = $image->storeAs('images', $employer->matricule);
-            $employer->image = $path;
+            $path = $image->store('public/images/employers');
+            $employer->image = str_replace('public/images/employers', '', $path);
         }
         $employer->save();
     }
@@ -61,6 +63,7 @@ class EmployerController extends Controller
      */
     public function edit(Employer $employer)
     {
+        $employer = Employer::select('employers.*', 'image as image_path')->find($employer->id);
         return Inertia::render('Employers/Edit', ['employer' => $employer]);
     }
 
@@ -79,8 +82,8 @@ class EmployerController extends Controller
         $employer->joined_at = $request->joined_at;
         $employer->matricule = Str::random(5);
         if($image = $request->file('image')){
-            $path = $image->storeAs('images', $employer->matricule);
-            $employer->image = $path;
+            $path = $image->storeAs('public/images/employers', $employer->matricule);
+            $employer->image = str_replace('public/images/employers', '', $path);
         }
         $employer->save();
     }

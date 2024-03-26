@@ -1,5 +1,5 @@
 <template>
-    <nav v-if="breadcrumbs" class="px-3 py-4">
+    <nav v-if="breadcrumbs" class="px-3 pb-4">
         <ol class="breadcrumbs-list">
             <li v-for="(page, i) in breadcrumbs" class="breadcrumbs-item" :key="`bread-${i + 1}`">
                 <span class="breadcrumbs-text border-b border-blue-400 current" v-if="page.current">{{ page.title }}</span>

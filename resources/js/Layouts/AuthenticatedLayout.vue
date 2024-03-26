@@ -146,7 +146,7 @@ const breadcrumbs = computed(() => usePage().props.breadcrumbs)
             </header>
 
             <!-- Page Content -->
-                <main class="grow bg-white max-w-2xl md:p-8 border-slate-100 mx-auto md:rounded-2xl lg:max-w-6xl">
+                <main class="grow bg-white max-w-2xl md:p-8 border-slate-100 mx-auto md:rounded-2xl lg:max-w-6xl md:mt-6">
                     <div class="breadcrumbs-container">
                         <breadcrumbs :breadcrumbs="breadcrumbs" />
                     </div>
