@@ -1,6 +1,6 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { Head, Link } from '@inertiajs/vue3'
 import AddEmployer from './AddEmployer.vue'
 import DeleteResource from '@/Components/DeleteResource.vue'
 import IconEdit from '@/Components/IconEdit.vue'
@@ -25,7 +25,7 @@ const props = defineProps({
 						<div class="employer-value">{{ employer.name_full }}</div>
 					</div>
 				</div>
-				<div class="md:grid md-grid-cols-2 lg:grid-cols-3 gap-4">
+				<div class="grid md-grid-cols-2 lg:grid-cols-3 md:gap-4 gap-2">
 					<div class="employer-detail">
 						<p class="employer-lbl">Matricule</p>
 						<div class="employer-value">{{ employer.matricule }}</div>

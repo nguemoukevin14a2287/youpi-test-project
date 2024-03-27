@@ -21,6 +21,24 @@ Breadcrumbs::for('employers.create', function (BreadcrumbTrail $trail) {
 	$trail->parent('employers.index');
 	$trail->push('Ajouter', route('employers.create'));
 });
+
+Breadcrumbs::for('postes.index', function (BreadcrumbTrail $trail) {
+	$trail->parent('dashboard');
+	$trail->push('Postes', route('postes.index'));
+});
+Breadcrumbs::for('postes.create', function (BreadcrumbTrail $trail) {
+	$trail->parent('postes.index');
+	$trail->push('Ajouter', route('postes.create'));
+});
+
+Breadcrumbs::for('grades.index', function (BreadcrumbTrail $trail) {
+	$trail->parent('dashboard');
+	$trail->push('Grades', route('grades.index'));
+});
+Breadcrumbs::for('grades.create', function (BreadcrumbTrail $trail) {
+	$trail->parent('grades.index');
+	$trail->push('Ajouter', route('grades.create'));
+});
 /*
 Breadcrumbs::for('employers.show', function (BreadcrumbTrail $trail, $employer) {
 	$trail->parent('employers.show');

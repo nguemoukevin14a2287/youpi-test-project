@@ -95,7 +95,7 @@
 			</div>
 			<div>
 				<label for="salary-input">Salaire:</label>
-				<input id="salary-input" class="form-control" v-model="form.salary" type="number" step="100" required placeholder="Quel est son salaire?" :disabled="form.processing" />
+				<input id="salary-input" class="form-control" v-model="form.salary" type="number" min="10000" step="100" required placeholder="Quel est son salaire?" :disabled="form.processing" />
 				<error-msg :message="form.errors.salary" />
 			</div>
 			<div class="self-end">

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\PosteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('employers', EmployerController::class);
+    Route::resource('grades', GradeController::class);
+    Route::resource('postes', PosteController::class);
 });
 
 require __DIR__.'/auth.php';

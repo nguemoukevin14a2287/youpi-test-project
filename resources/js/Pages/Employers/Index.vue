@@ -1,6 +1,6 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { Head, Link } from '@inertiajs/vue3'
 import DeleteResource from '@/Components/DeleteResource.vue'
 import NumberItems from '@/Components/NumberItems.vue'
 import Pagination from '@/Components/Pagination.vue'

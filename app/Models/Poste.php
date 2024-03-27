@@ -13,4 +13,8 @@ class Poste extends Model
     {
         return $this->belongsTo(Grade::class, 'grade_id');
     }
+    public function employers()
+    {
+        return $this->hasMany(Employer::class);
+    }
 }

@@ -1,21 +1,20 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head } from '@inertiajs/vue3'
-import AddEmployer from './AddEmployer.vue'
-
+import AddGrade from './AddGrade.vue'
 const props = defineProps({
-	employer: {required: true}
+	grade: {required: true}
 })
 </script>
 
 <template>
-		<Head title="Modifier un employer" />
+		<Head title="Editer un grade" />
 	<authenticated-layout>
 		<template #header>
-			<h2 class="h2-title">Modifier un employer</h2>
+			<h2 class="h2-title">Editer un grade</h2>
 		</template>
 		<div class="content-page">
-			<add-employer :employer="employer" />
+			<add-grade :grade="grade" />
 		</div>
 	</authenticated-layout>
 </template>
