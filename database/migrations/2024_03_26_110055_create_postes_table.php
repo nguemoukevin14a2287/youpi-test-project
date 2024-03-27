@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('postes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grade_id')->constrained();
+            $table->foreignId('grade_id')->constrained()->nullable()->cascadeOnUpdate()->nullOnDelete();
             $table->string('name', 200);
             $table->string('title', 200);
             $table->text('description')->nullable();

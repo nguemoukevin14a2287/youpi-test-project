@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('poste_id')->constrained()->nullable();
+            $table->foreignId('poste_id')->constrained()->nullable()->cascadeOnUpdate()->nullOnDelete();
             $table->string('matricule', 20)->unique();
             $table->char('sexe');
             $table->string('name', 200);
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('image', 200)->nullable();
             $table->text('strengths')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

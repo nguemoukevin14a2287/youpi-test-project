@@ -25,9 +25,9 @@ class EmployerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return Inertia::render('Employers/Create');
+        return Inertia::render('Employers/Create', ['employer' => ['poste' => $request->poste, 'poste_id' => $request->poste]]);
     }
 
     /**

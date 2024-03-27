@@ -40,6 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('employers', EmployerController::class);
     Route::resource('grades', GradeController::class);
     Route::resource('postes', PosteController::class);
+
+    Route::name('fetch.')->prefix('/fetch')->group(function () {
+        Route::get('/grades', [GradeController::class, 'api_index'])->name('grades.index');
+        Route::get('/postes', [PosteController::class, 'api_index'])->name('postes.index');
+    });
 });
+
 
 require __DIR__.'/auth.php';

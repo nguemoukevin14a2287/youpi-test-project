@@ -34,7 +34,7 @@ class Employer extends Model
     {
         $str = 'M. ';
         if($this->sexe == 'g'){
-            if($this->civility == 'marie'){
+            if($this->civility == 'marié'){
                 $str = 'Mme. ';
             } else {
                 $str = 'Mlle. ';

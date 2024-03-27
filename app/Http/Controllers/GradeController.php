@@ -80,4 +80,8 @@ class GradeController extends Controller
     {
         $grade->delete();
     }
+    public function api_index()
+    {
+        return response()->json(Grade::select('id', 'name', 'title')->get());
+    }
 }

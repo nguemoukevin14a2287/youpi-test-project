@@ -6,16 +6,23 @@
 
 	const swal = inject('$swal')
 	const postesList = ref([])
-	const civilitiesList = ref(['celibataire', 'marie', 'divorce'])
+	const civilitiesList = ref(['célibataire', 'marié', 'divorcé'])
 	const props = defineProps({
 		employer: {default: () => ({})}
 	})
-	const defaultEmployer = {name: '', birthday: '', address: '', joined_at: '', salary: '', sexe: '', strengths: [], image: null, matricule: '', poste: 0}
+	const defaultEmployer = {name: '', birthday: '', address: '', joined_at: '', salary: '', sexe: '', strengths: [], image: null, matricule: '', poste: 0, civility: 'marié'}
 	const form = useForm({...defaultEmployer, ...props.employer})
+	form.poste = form.poste || form.poste_id;
 	const imgUploaded = ref(props.employer.image_path || defaultWorker)
 
 	const isUpdate = computed(() => props.employer && props.employer.id && props.employer.id == parseInt(props.employer.id))
 
+	const isLoadingPostes = ref(true)
+
+	axios.get(route('fetch.grades.index')).then(res => {
+		postesList.value = res.data
+		isLoadingPostes.value = false
+	})
 	const save = () => {
 		if(isUpdate.value){
 			form.transform(data => ({...data, _method: 'put'})).post(route('employers.update', props.employer), {
@@ -66,17 +73,17 @@
 			</div>
 			<div>
 				<label for="poste-input">Poste:</label>
-				<select name="poste" id="poste-input" class="form-control" v-model="form.poste" placeholder="Matricule de l'employer" :disabled="form.processing">
+				<select name="poste" id="poste-input" class="form-control" v-model="form.poste" placeholder="Matricule de l'employer" :disabled="form.processing || isLoadingPostes">
 					<option v-for="(poste, i) in postesList" :value="poste.id">{{ poste.title }}</option>
 				</select>
 				<error-msg :message="form.errors.poste" />
 			</div>
 			<div>
 				<label for="civility-input">Civilite:</label>
-				<select name="civility" id="civility-input" class="form-control" v-model="form.civility" placeholder="Matricule de l'employer" :disabled="form.processing">
+				<select name="civility" id="civility-input" class="form-control" v-model="form.civility" placeholder="Matricule de l'employer" required :disabled="form.processing">
 					<option v-for="(civility, i) in civilitiesList" :value="civility">{{ civility }}</option>
 				</select>
-				<error-msg :message="form.errors.poste" />
+				<error-msg :message="form.errors.civility" />
 			</div>
 			<div>
 				<label for="address-input">Adresse:</label>

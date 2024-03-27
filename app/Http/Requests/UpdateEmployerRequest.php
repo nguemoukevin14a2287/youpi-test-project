@@ -31,7 +31,7 @@ class UpdateEmployerRequest extends FormRequest
             'address' => ['nullable'],
             'joined_at' => ['required', 'date'],
             'salary' => ['nullable', 'integer'],
-            'civility' => ['required', 'in:celibataire,marie,divorce'],
+            'civility' => ['required', 'in:célibataire,marié,divorcé,mariée'],
             'poste' => ['nullable'/*, 'exists:postes,id'*/]
         ];
     }

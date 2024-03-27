@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePosteRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdatePosteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,10 @@ class UpdatePosteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'min:2', Rule::unique('grades')->ignore(request()->id)],
+            'level' => ['nullable', 'integer'],
+            'title' => ['required'],
+            'description' => ['nullable']
         ];
     }
 }
