@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateEmployerRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class EmployerController extends Controller
 {
@@ -40,6 +41,7 @@ class EmployerController extends Controller
         $employer->salary = $request->salary;
         $employer->address = $request->address;
         $employer->sexe = $request->sexe;
+        $employer->civility = $request->civility;
         $employer->strengths = $request->strengths;
         $employer->joined_at = $request->joined_at;
         $employer->matricule = $request->matricule ?? Str::random(7);
@@ -55,6 +57,7 @@ class EmployerController extends Controller
      */
     public function show(Employer $employer)
     {
+        $employer = Employer::selectRaw('employers.*, joined_at as joined_at_full, name as name_full, image as image_path, birthday as age, birthday as birthday_full, sexe as sexe_full, joined_at as age_work')->find($employer->id); 
         return Inertia::render('Employers/Show', ['employer' => $employer]);
     }
 
@@ -70,19 +73,22 @@ class EmployerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEmployerRequest $request, Employe $employer)
-    {        
-        $employer = new Employer();
+    public function update(UpdateEmployerRequest $request, Employer $employer)
+    {
         $employer->name = $request->name;
         $employer->birthday = $request->birthday;
         $employer->salary = $request->salary;
         $employer->address = $request->address;
         $employer->sexe = $request->sexe;
+        $employer->civility = $request->civility;
         $employer->strengths = $request->strengths;
         $employer->joined_at = $request->joined_at;
-        $employer->matricule = Str::random(5);
+        $employer->matricule = $request->matricule;
         if($image = $request->file('image')){
-            $path = $image->storeAs('public/images/employers', $employer->matricule);
+            if($employer->image) {
+                Storage::delete('public/images/employers/' . $employer->image);
+            }
+            $path = $image->store('public/images/employers');
             $employer->image = str_replace('public/images/employers', '', $path);
         }
         $employer->save();

@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-		<Head title="Ajouter un employer" />
+		<Head title="Modifier un employer" />
 	<authenticated-layout>
 		<template #header>
 			<h2 class="h2-title">Ajouter un employer</h2>

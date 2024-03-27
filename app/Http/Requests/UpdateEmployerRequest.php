@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateEmployerRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateEmployerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,16 @@ class UpdateEmployerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'matricule' => [Rule::unique('employers')->ignore(request()->id)],
+            'name' => ['required','min:4'],
+            'image' => ['nullable'],
+            'sexe' => ['required', 'in:b,g'],
+            'birthday' => ['required', 'date', 'before:' . date('Y-m-d', strtotime('21 years ago'))],
+            'address' => ['nullable'],
+            'joined_at' => ['required', 'date'],
+            'salary' => ['nullable', 'integer'],
+            'civility' => ['required', 'in:celibataire,marie,divorce'],
+            'poste' => ['nullable'/*, 'exists:postes,id'*/]
         ];
     }
 }

@@ -17,6 +17,10 @@ class Employer extends Model
     {
         return $this->belongsTo(Poste::class);
     }
+    public function getGradeAttribute()
+    {
+        return $this->poste ? $this->poste->grade : null;
+    }
 
     public function getImagePathAttribute()
     {
@@ -24,6 +28,42 @@ class Employer extends Model
     }
     public function getSexeFullAttribute($val)
     {
-        return $val == 'b' ? 'Homme' : 'Femme';
+        return $this->sexe == 'b' ? 'Homme' : 'Femme';
+    }
+    public function getNameFullAttribute($val)
+    {
+        $str = 'M. ';
+        if($this->sexe == 'g'){
+            if($this->civility == 'marie'){
+                $str = 'Mme. ';
+            } else {
+                $str = 'Mlle. ';
+            }
+        }
+        return $str . $this->name;
+    }
+    public function getAgeAttribute()
+    {
+        return date_diff(date_create(), date_create($this->birthday))->format('%y ans');
+    }
+    public function getAgeWorkAttribute()
+    {
+        $diff = date_diff(date_create(), date_create($this->joined_at));
+        $m = $diff->format('%y') * 12 + $diff->format('%m');
+        return [
+            'all' => $diff->format('%y ans %m mois et %d jours'),
+            'months' => $m . ' mois',
+            'years' => $diff->format('%y ans'),
+            'days' => $diff->format('%a jours')
+        ];
+        return date_diff(date_create(), date_create($this->joined_at))->format('%y ans');
+    }
+    public function getJoinedAtFullAttribute()
+    {
+        return date('D jS M Y', strtotime($this->joined_at));
+    }
+    public function getBirthdayFullAttribute($val)
+    {
+        return date('D jS M Y', strtotime($this->birthday));
     }
 }

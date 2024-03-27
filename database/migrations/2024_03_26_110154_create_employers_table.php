@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address', 250)->nullable();
             $table->date('joined_at');
             $table->integer('salary')->default('0');
+            $table->string('civility', 200)->default('celibataire');
             $table->string('image', 200)->nullable();
             $table->text('strengths')->nullable();
             $table->timestamps();
