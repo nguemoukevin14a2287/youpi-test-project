@@ -30,8 +30,20 @@ class StoreEmployerRequest extends FormRequest
             'address' => ['nullable'],
             'joined_at' => ['required', 'date'],
             'salary' => ['nullable', 'integer'],
-            'civility' => ['required', 'in:célibataire,marié,divorcé'],
-            'poste' => ['nullable'/*, 'exists:postes,id'*/]
+            'civility' => ['required', 'in:célibataire,marié,divorcé,mariée,divorcée'],
+            'poste_id' => ['required', 'exists:postes,id']
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'Nom',
+            'sexe' => 'genre',
+            'birtfday' => 'date de naissance',
+            'joined_at' => 'date de recrutement',
+            'civility' => 'civilité',
+            'poste_id' => 'poste'
         ];
     }
 }

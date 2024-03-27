@@ -27,7 +27,7 @@ class EmployerController extends Controller
      */
     public function create(Request $request)
     {
-        return Inertia::render('Employers/Create', ['employer' => ['poste' => $request->poste, 'poste_id' => $request->poste]]);
+        return Inertia::render('Employers/Create', ['employer' => ['poste_id' => $request->poste]]);
     }
 
     /**
@@ -41,6 +41,7 @@ class EmployerController extends Controller
         $employer->salary = $request->salary;
         $employer->address = $request->address;
         $employer->sexe = $request->sexe;
+        $employer->poste_id = $request->poste_id;
         $employer->civility = $request->civility;
         $employer->strengths = $request->strengths;
         $employer->joined_at = $request->joined_at;
@@ -57,7 +58,8 @@ class EmployerController extends Controller
      */
     public function show(Employer $employer)
     {
-        $employer = Employer::selectRaw('employers.*, joined_at as joined_at_full, name as name_full, image as image_path, birthday as age, birthday as birthday_full, sexe as sexe_full, joined_at as age_work')->find($employer->id); 
+        $employer = Employer::with('poste')->selectRaw('employers.*, joined_at as joined_at_full, name as name_full, image as image_path, birthday as age, birthday as birthday_full, sexe as sexe_full, joined_at as age_work')->find($employer->id);
+        $employer->append('grade');
         return Inertia::render('Employers/Show', ['employer' => $employer]);
     }
 
@@ -84,6 +86,7 @@ class EmployerController extends Controller
         $employer->strengths = $request->strengths;
         $employer->joined_at = $request->joined_at;
         $employer->matricule = $request->matricule;
+        $employer->poste_id = $request->poste_id;
         if($image = $request->file('image')){
             if($employer->image) {
                 Storage::delete('public/images/employers/' . $employer->image);

@@ -10,16 +10,15 @@
 	const props = defineProps({
 		employer: {default: () => ({})}
 	})
-	const defaultEmployer = {name: '', birthday: '', address: '', joined_at: '', salary: '', sexe: '', strengths: [], image: null, matricule: '', poste: 0, civility: 'marié'}
+	const defaultEmployer = {name: '', birthday: '', address: '', joined_at: '', salary: '', sexe: '', strengths: [], image: null, matricule: '', poste_id: 0, civility: 'marié'}
 	const form = useForm({...defaultEmployer, ...props.employer})
-	form.poste = form.poste || form.poste_id;
 	const imgUploaded = ref(props.employer.image_path || defaultWorker)
 
 	const isUpdate = computed(() => props.employer && props.employer.id && props.employer.id == parseInt(props.employer.id))
 
 	const isLoadingPostes = ref(true)
 
-	axios.get(route('fetch.grades.index')).then(res => {
+	axios.get(route('fetch.postes.index')).then(res => {
 		postesList.value = res.data
 		isLoadingPostes.value = false
 	})
@@ -73,10 +72,10 @@
 			</div>
 			<div>
 				<label for="poste-input">Poste:</label>
-				<select name="poste" id="poste-input" class="form-control" v-model="form.poste" placeholder="Matricule de l'employer" :disabled="form.processing || isLoadingPostes">
+				<select name="poste" id="poste-input" class="form-control" v-model="form.poste_id" placeholder="Matricule de l'employer" :disabled="form.processing || isLoadingPostes">
 					<option v-for="(poste, i) in postesList" :value="poste.id">{{ poste.title }}</option>
 				</select>
-				<error-msg :message="form.errors.poste" />
+				<error-msg :message="form.errors.poste_id" />
 			</div>
 			<div>
 				<label for="civility-input">Civilite:</label>
